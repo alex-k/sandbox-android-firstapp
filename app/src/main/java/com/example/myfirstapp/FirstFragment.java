@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,9 +13,12 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myfirstapp.databinding.FragmentFirstBinding;
 
+import java.text.BreakIterator;
+
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+    private TextView showCountTextVew;
 
     @Override
     public View onCreateView(
@@ -23,6 +27,7 @@ public class FirstFragment extends Fragment {
     ) {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
+        showCountTextVew = binding.textviewFirst;
         return binding.getRoot();
 
     }
@@ -45,6 +50,20 @@ public class FirstFragment extends Fragment {
                 myToast.show();
             }
         });
+
+        binding.countButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                countMe(view);
+            }
+        });
+    }
+
+    private void countMe(View view) {
+        String countString = showCountTextVew.getText().toString();
+        Integer count = Integer.parseInt(countString);
+        count++;
+        showCountTextVew.setText(count.toString());
     }
 
     @Override
